@@ -264,6 +264,78 @@ inventory.forEach(blokas => {
 
 console.log(`Bendra viso inventoriaus verte: ${inventoriausBendraVerte} EUR`);
 
+console.log("=============================");
+
+/*
+console.log("Isvedimas i konsole pagal pasirinkta kategorija (filtra):");
+console.log("=============================");
+const filterBooksByCategory = (kategorija) =>{
+
+    const selectedCategory = inventory.filter(option => 
+        option.category === kategorija);
+
+    selectedCategory[0].books.forEach(knyga =>{
+        console.log(`Knygos pavadinimas: ${knyga.title}`);
+        console.log(`ISBN: ${knyga.ISBN}`);
+        if(knyga.publishing_year === 2024){
+            console.log(`Leidimo metai: ${knyga.publishing_year} / Nauja knyga`);
+        }else{
+            console.log(`Leidimo metai: ${knyga.publishing_year}`);
+        }
+        console.log(`Puslapių skaičius: ${knyga.pages}`);
+        console.log(`Kiekis: ${knyga.quantity}`);
+        console.log(`Kaina: ${knyga.price} EUR`);
+        console.log("=============================");
+    });
+};
+filterBooksByCategory('Psichologija');
+
+console.log("=============================");
+*/
+
+//Funkcija, kuri isfiltruoja ir isveda knygas pagal pasirinkta kategorija
+const filterBooksByCategory = (kategorija) =>{
+    //Filtruoja pagal kategorija
+    const optionOfCategory = inventory.filter(option =>
+        option.category === kategorija);
+    //Sukuria li elementa knygai ir p elementus knygos informacijai pateikti
+    //Nurodomas 1-asis masyvo elementas [0], nes pasirinkus kategorija is saraso
+    //tik vienas elementas ir yra
+    optionOfCategory[0].books.forEach(knyga =>{
+        const li = document.createElement('li');
+        const title = document.createElement('p');
+        title.textContent = `Pavadinimas: ${knyga.title}`;
+        const isbn = document.createElement('p');
+        isbn.textContent = `ISBN: ${knyga.ISBN}`;
+        const publishingYear = document.createElement('p');
+        publishingYear.textContent = `Leidimo metai: ${knyga.publishing_year}`;
+        const pages = document.createElement('p');
+        pages.textContent = `Puslapių skaičius: ${knyga.pages}`;
+        const price = document.createElement('p');
+        price.textContent = `Kaina: ${knyga.price} EUR`;
+        //Prideda p elementus i li elementa    
+        li.appendChild(title);
+        li.appendChild(isbn);
+        li.appendChild(publishingYear);
+        li.appendChild(pages);
+        li.appendChild(price);
+    //Prideda li elementa i ul
+    document.querySelector('ul').appendChild(li)
+    });
+}
+
+//Vartotojui pasirinkus kategorija ir paspaudus mygtuka iskvieciama filtravimo f-ja
+document.querySelector('button').addEventListener('click',()=>{
+    const selectedCategory = document.querySelector('select').value;
+    filterBooksByCategory(selectedCategory);
+});
+
+
+
+
+
+
+
 
 //console.log(inventory[4].category);
 
